@@ -1,0 +1,4 @@
+for create folder using terminal - mkdir folderName
+for create file using terminal - ni filename  / touch name.ts
+npm i node-appwrite
+npm i axios bcryptjs jsonwebtoken nodemailer react-hot-toast
