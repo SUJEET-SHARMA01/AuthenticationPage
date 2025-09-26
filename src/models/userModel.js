@@ -1,31 +1,33 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const userSchema = new Schema({
   username: {
     type: String,
-    require: [true, "Please enter username"],
+    required: [true, "Please enter username"],
   },
   email: {
     type: String,
-    require: [true, "please enter your email"],
+    required: [true, "Please enter your email"],
+    unique: true, // prevents duplicate emails
   },
   password: {
     type: String,
-    require: [true, "please enter your password"],
+    required: [true, "Please enter your password"],
   },
   isVerified: {
     type: Boolean,
-    deflate: false,
+    default: false,
   },
   isAdmin: {
     type: Boolean,
-    deflate: false,
+    default: false,
   },
-  forgetPAsswordToken: String,
+  forgetPasswordToken: String,
   forgetPasswordTokenExpiry: Date,
   verifyToken: String,
   verifyTokenExpiry: Date,
 });
 
-const user = mongoose.model("user", userSchema);
+// Prevent overwrite error in Next.js hot reload
+const user = mongoose.models.users || mongoose.model("users", userSchema);
 export default user;
